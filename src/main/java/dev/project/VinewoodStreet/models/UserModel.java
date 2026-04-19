@@ -34,7 +34,7 @@ public class UserModel implements UserDetails{
     private Double saldoCaixa;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<AcaoModel> portfolio;
+    private List<AcaoModel> acoes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
