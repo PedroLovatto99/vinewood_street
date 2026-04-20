@@ -23,6 +23,7 @@ public class RagConfiguration {
 
     @Bean
     public EmbeddingModel embeddingModel() {
+
         return new AllMiniLmL6V2EmbeddingModel();
     }
 
