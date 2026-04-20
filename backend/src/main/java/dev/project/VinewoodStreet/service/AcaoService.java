@@ -11,10 +11,12 @@ import dev.project.VinewoodStreet.models.UserModel;
 import dev.project.VinewoodStreet.repository.AcaoRepository;
 import dev.project.VinewoodStreet.repository.EmpresaRepository;
 import dev.project.VinewoodStreet.repository.UsuarioRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class AcaoService {
 
     AcaoRepository acaoRepo;
@@ -22,9 +24,10 @@ public class AcaoService {
     EmpresaRepository empreRepo;
     AcaoMapper acaoMapper;
 
-    public AcaoService(AcaoRepository acaoRepo, UsuarioRepository userRepo, AcaoMapper acaoMapper) {
+    public AcaoService(AcaoRepository acaoRepo, UsuarioRepository userRepo, EmpresaRepository empreRepo, AcaoMapper acaoMapper) {
         this.acaoRepo = acaoRepo;
         this.userRepo = userRepo;
+        this.empreRepo = empreRepo;
         this.acaoMapper = acaoMapper;
     }
 
@@ -44,7 +47,10 @@ public class AcaoService {
     }
 
     @Transactional
-    public void comprarAcao(UserModel usuarioLogado, ComprarAcaoRequest request) {
+    public void comprarAcao(Long usuarioId, ComprarAcaoRequest request) {
+
+        UserModel usuarioLogado = userRepo.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado no sistema."));
 
         EmpresaModel empresa = empreRepo.findBySigla(request.sigla())
                 .orElseThrow(() -> new RuntimeException("Empresa não encontrada em Los Santos!"));
@@ -68,7 +74,10 @@ public class AcaoService {
     }
 
     @Transactional
-    public void venderAcao(UserModel usuarioLogado, VenderAcaoRequest request) {
+    public void venderAcao(Long usuarioId, VenderAcaoRequest request) {
+
+        UserModel usuarioLogado = userRepo.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado no sistema."));
 
         EmpresaModel empresa = empreRepo.findBySigla(request.sigla())
                 .orElseThrow(() -> new RuntimeException("Empresa não encontrada!"));

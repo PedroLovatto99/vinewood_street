@@ -1,5 +1,6 @@
 package dev.project.VinewoodStreet.controller;
 
+import dev.project.VinewoodStreet.config.JWTUserData;
 import dev.project.VinewoodStreet.dto.request.ComprarAcaoRequest;
 import dev.project.VinewoodStreet.dto.request.VenderAcaoRequest;
 import dev.project.VinewoodStreet.dto.response.AcaoCarteiraResponse;
@@ -20,17 +21,18 @@ public class AcaoController {
 
     AcaoService acaoService;
 
+    public AcaoController(AcaoService acaoService) {
+        this.acaoService = acaoService;
+    }
 
     @GetMapping
     @Operation(summary = "Listar saldo e ações do usuário", description = "Listar o saldo e ações que o usuário possui")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Saldo e ações do usuário")
     })
-    public ResponseEntity<AcaoCarteiraResponse> verCarteira(@AuthenticationPrincipal UserModel usuarioLogado) {
+    public ResponseEntity<AcaoCarteiraResponse> verCarteira(@AuthenticationPrincipal JWTUserData usuarioLogado) {
 
-        Long id = usuarioLogado.getId();
-
-        AcaoCarteiraResponse carteiraAcao = acaoService.buscarCarteira(id);
+        AcaoCarteiraResponse carteiraAcao = acaoService.buscarCarteira(usuarioLogado.userId());
 
         return ResponseEntity.ok(carteiraAcao);
 
@@ -43,9 +45,10 @@ public class AcaoController {
             @ApiResponse(responseCode = "201", description = "Ação comprada com sucesso"),
             @ApiResponse(responseCode = "400", description = "Erro na compra. Dados inválidos")
     })
-    public ResponseEntity<String> comprarAcao(@AuthenticationPrincipal UserModel usuarioLogado,
+    public ResponseEntity<String> comprarAcao(@AuthenticationPrincipal JWTUserData usuarioLogado,
                                               @Valid @RequestBody ComprarAcaoRequest request) {
-        acaoService.comprarAcao(usuarioLogado, request);
+
+        acaoService.comprarAcao(usuarioLogado.userId(), request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Ação/ações comprada(s) com sucesso!");
 
@@ -58,9 +61,10 @@ public class AcaoController {
             @ApiResponse(responseCode = "201", description = "Ação vendida com sucesso"),
             @ApiResponse(responseCode = "400", description = "Erro na venda. Dados inválidos")
     })
-    public ResponseEntity<String> venderAcao(@AuthenticationPrincipal UserModel usuarioLogado,
+    public ResponseEntity<String> venderAcao(@AuthenticationPrincipal JWTUserData usuarioLogado,
                                              @Valid @RequestBody VenderAcaoRequest request) {
-        acaoService.venderAcao(usuarioLogado, request);
+
+        acaoService.venderAcao(usuarioLogado.userId(), request);
         return ResponseEntity.status(HttpStatus.CREATED).body("Ação/ações vendida(s) com sucesso!");
 
     }

@@ -3,7 +3,9 @@ package dev.project.VinewoodStreet.dto.mapper;
 import dev.project.VinewoodStreet.dto.response.AcaoCarteiraResponse;
 import dev.project.VinewoodStreet.dto.response.AcaoCompradaDTO;
 import dev.project.VinewoodStreet.models.AcaoModel;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AcaoMapper {
 
     public AcaoCompradaDTO toResponse(AcaoModel acaoModel) {
