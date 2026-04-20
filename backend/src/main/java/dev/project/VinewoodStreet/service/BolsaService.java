@@ -28,7 +28,8 @@ public class BolsaService {
     }
 
     @Transactional
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 600000)
+    //@Scheduled(fixedRate = 10000)
     public void gerarEventoAleatorio() {
 
         List<EmpresaModel> empresas = empresaRepo.findAll();
@@ -40,7 +41,10 @@ public class BolsaService {
         String[] partes = noticiaBruta.split("\\|");
 
         double variacao = calcularPercentual(impacto);
-        double novoPreco = empresa.getPrecoAtual() * (1 + (variacao / 100));
+
+        double novoPrecoBruto = empresa.getPrecoAtual() * (1 + (variacao / 100));
+
+        double novoPreco = Math.round(novoPrecoBruto * 100.0) / 100.0;
 
         EventoNoticiaModel novaNoticia = new EventoNoticiaModel();
         novaNoticia.setEmpresa(empresa);
