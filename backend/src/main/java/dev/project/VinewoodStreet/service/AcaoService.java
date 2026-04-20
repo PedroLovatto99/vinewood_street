@@ -29,14 +29,14 @@ public class AcaoService {
     }
 
     @Transactional(readOnly = true)
-    public AcaoCarteiraResponse buscarCarteira(UserModel usuario) {
+    public AcaoCarteiraResponse buscarCarteira(Long id) {
 
-        UserModel usuarioModel = userRepo.findById(usuario.getId())
+        UserModel usuarioModel = userRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado no sistema."));
 
-        Double saldo = usuario.getSaldoCaixa();
+        Double saldo = usuarioModel.getSaldoCaixa();
 
-        List<AcaoCompradaDTO> acoesDto = usuario.getAcoes().stream()
+        List<AcaoCompradaDTO> acoesDto = usuarioModel.getAcoes().stream()
                 .map(acao -> acaoMapper.toResponse(acao))
                 .toList();
 
