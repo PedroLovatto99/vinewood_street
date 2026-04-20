@@ -2,15 +2,14 @@ package dev.project.VinewoodStreet.models;
 
 import dev.project.VinewoodStreet.enums.TipoImpacto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "evento_noticia")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventoNoticiaModel {

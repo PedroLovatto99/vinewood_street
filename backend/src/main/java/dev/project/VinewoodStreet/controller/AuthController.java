@@ -1,4 +1,4 @@
-package reservAMF.Controller;
+package dev.project.VinewoodStreet.controller;
 
 import dev.project.VinewoodStreet.config.TokenConfig;
 import dev.project.VinewoodStreet.dto.request.LoginRequest;
@@ -7,6 +7,7 @@ import dev.project.VinewoodStreet.dto.response.LoginResponse;
 import dev.project.VinewoodStreet.dto.response.RegisterUserResponse;
 import dev.project.VinewoodStreet.models.UserModel;
 import dev.project.VinewoodStreet.repository.UsuarioRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class AuthController {
         this.tokenConfig = tokenConfig;
     }
 
+    @Operation(summary = "Realizar login", description = "Fazer Login no sistema")
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
 
@@ -49,12 +51,15 @@ public class AuthController {
 
     }
 
+    @Operation(summary = "Criar uma conta", description = "Criar uma conta no sistema")
     @PostMapping("/register")
     public ResponseEntity<RegisterUserResponse> register(@Valid @RequestBody RegisterRequest request) {
         UserModel newUser = new UserModel();
         newUser.setSenha(passwordEncoder.encode(request.senha()));
         newUser.setEmail(request.email());
         newUser.setNome(request.nome());
+        newUser.setSaldoCaixa(10000.0);
+
 
         userRepository.save(newUser);
 
