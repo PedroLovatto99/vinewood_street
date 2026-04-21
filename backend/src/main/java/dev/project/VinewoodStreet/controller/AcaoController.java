@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/acoes")
+@CrossOrigin(origins = "*")
 public class AcaoController {
 
     AcaoService acaoService;

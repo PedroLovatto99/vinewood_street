@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinewood Street - Mercado de Ações</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-v-dark">
+
+    <header class="bg-v-green p-3 shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="display-6 fw-bold text-white mb-0">VINEWOOD STREET</h1>
+                <p class="text-dark fw-bold mb-0 small">LIDANDO COM OS ALTOS E BAIXOS DA VIDA</p>
+            </div>
+            
+            <div class="bg-v-dark p-2 rounded text-end min-w-150" id="areaUsuario">
+                <span class="text-muted small d-block">Meu Saldo</span>
+                <span class="fs-4 fw-bold text-white" id="saldoUsuario">Carregando...</span>
+                <a href="index.html" class="btn btn-sm btn-outline-success d-none mt-1" id="btnLogin">Fazer Login</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-black text-v-green py-1 overflow-hidden">
+        <marquee behavior="scroll" direction="left" id="tickerNoticias">
+            Bem-vindo à Vinewood Street. A aguardar as últimas notícias...
+        </marquee>
+    </div>
+
+    <main class="container my-4">
+        
+        <ul class="nav nav-tabs border-v-green mb-0">
+            <li class="nav-item"><a class="nav-link bg-v-dark text-muted border-0" href="#">Início</a></li>
+            <li class="nav-item"><a class="nav-link active bg-v-gray text-white border-v-green border-bottom-0" href="#">Mercados</a></li>
+            <li class="nav-item"><a class="nav-link bg-v-dark text-muted border-0" href="#">Meu Portfólio</a></li>
+        </ul>
+
+        <div class="table-responsive bg-v-gray p-3 rounded-bottom border border-v-green border-top-0 shadow">
+            <table class="table table-dark table-hover mb-0 align-middle">
+                <thead>
+                    <tr class="text-muted border-bottom border-secondary">
+                        <th>Sigla</th>
+                        <th>Nome da Empresa</th>
+                        <th class="text-end">Preço Atual</th>
+                        <th class="text-end">Variação (24h)</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaEmpresas">
+                    <tr><td colspan="4" class="text-center py-4">Carregando mercado...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div class="modal fade" id="modalEmpresa" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-v-gray border-v-green">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title fw-bold text-white" id="modalNomeEmpresa">Nome (SGL)</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="text-muted small mb-2" id="modalDescricao">Descrição da empresa...</p>
+                            <div class="bg-v-dark p-2 rounded">
+                                <canvas id="graficoAcao" height="200"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 d-flex flex-column justify-content-center">
+                            <div class="bg-v-dark p-3 rounded mb-3 text-center border border-secondary">
+                                <span class="text-muted d-block small">Preço Atual</span>
+                                <span class="fs-2 fw-bold text-white" id="modalPrecoAtual">$0.00</span>
+                            </div>
+                            
+                            <button class="btn btn-v-green btn-lg fw-bold w-100 d-none" id="btnComprar">
+                                COMPRAR
+                            </button>
+                            
+                            <div class="alert alert-warning mt-3 d-none small p-2 text-center" id="avisoLogin">
+                                Faça login para negociar.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 bg-dark p-2 rounded border border-secondary">
+                        <span class="badge bg-danger mb-1" id="badgeImpacto">NOTÍCIA</span>
+                        <p class="mb-0 small fst-italic" id="noticiaEmpresa">Nenhuma fofoca recente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
