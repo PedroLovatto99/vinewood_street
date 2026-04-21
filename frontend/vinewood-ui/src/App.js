@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 import Auth from './pages/Auth';
-import Dashboard from './pages/Dashboard'; // <-- DESCOMENTAR
+import Dashboard from './pages/Dashboard'; 
 
 function App() {
   return (

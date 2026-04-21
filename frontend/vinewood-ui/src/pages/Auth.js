@@ -74,7 +74,7 @@ export default function Auth() {
         <div className="card shadow-lg border-success border-top border-4 bg-dark">
           <div className="card-body p-5 text-center">
             
-            <h1 className="display-5 fw-bold text-success mb-1">BAWSAQ</h1>
+            <h1 className="display-5 fw-bold text-success mb-1">Vinewood Street</h1>
             <p className="text-light mb-4">
               {isLoginMode ? "Terminal de Corretores" : "Registo de Novo Corretor"}
             </p>
