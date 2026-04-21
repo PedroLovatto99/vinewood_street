@@ -9,16 +9,16 @@ import java.util.Comparator;
 
 public class FuncoesAuxiliares {
 
-    public static Double calcularVariacao24h(EmpresaModel empresa) {
+    public static Double calcularVariacao3h(EmpresaModel empresa) {
 
         if (empresa.getHistorico() == null || empresa.getHistorico().isEmpty()) {
             return 0.0;
         }
 
-        LocalDateTime exatas24hAtras = LocalDateTime.now().minusHours(24);
+        LocalDateTime limiteTempo = LocalDateTime.now().minusHours(3);
 
         Double precoAntigo = empresa.getHistorico().stream()
-                .filter(h -> h.getDataHora().isAfter(exatas24hAtras))
+                .filter(h -> h.getDataHora().isAfter(limiteTempo))
                 .min(Comparator.comparing(HistoricoPrecoModel::getDataHora))
                 .map(HistoricoPrecoModel::getPreco)
                 .orElse(empresa.getPrecoAtual());

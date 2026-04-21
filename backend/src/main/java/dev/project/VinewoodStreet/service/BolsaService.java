@@ -30,13 +30,12 @@ public class BolsaService {
     }
 
     @Transactional
-    @Scheduled(fixedRate = 600000)
-    //@Scheduled(fixedRate = 15000)
+    //@Scheduled(fixedRate = 600000) // 10 minutos
+    @Scheduled(fixedRate = 60000) // 1 minuto
     @Caching(evict = {
             @CacheEvict(value = "lista_empresas", allEntries = true),
             @CacheEvict(value = "lista_noticias", allEntries = true)
     })
-    //@Scheduled(fixedRate = 10000)
     public void gerarEventoAleatorio() {
 
         List<EmpresaModel> empresas = empresaRepo.findAll();

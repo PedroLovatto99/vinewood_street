@@ -10,7 +10,7 @@ public class EmpresaCardsMapper {
 
     public EmpresasCardsDTO toResponse(EmpresaModel empresa) {
 
-        Double variacao24h = FuncoesAuxiliares.calcularVariacao24h(empresa);
+        Double variacao24h = FuncoesAuxiliares.calcularVariacao3h(empresa);
 
         EmpresasCardsDTO empresaResponse = new EmpresasCardsDTO(
                empresa.getId(),

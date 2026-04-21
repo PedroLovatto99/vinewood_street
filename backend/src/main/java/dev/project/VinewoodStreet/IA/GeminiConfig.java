@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Duration;
+
 @Configuration
 public class GeminiConfig {
 
@@ -19,6 +21,7 @@ public class GeminiConfig {
                 .apiKey(apiKey)
                 .modelName("gemini-3-flash-preview")
                 .temperature(0.7)
+                .timeout(Duration.ofSeconds(60))
                 .build();
     }
 
