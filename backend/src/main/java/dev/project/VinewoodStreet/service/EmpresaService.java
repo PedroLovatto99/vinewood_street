@@ -6,6 +6,7 @@ import dev.project.VinewoodStreet.dto.response.EmpresaDetalheDTO;
 import dev.project.VinewoodStreet.dto.response.EmpresasCardsDTO;
 import dev.project.VinewoodStreet.models.EmpresaModel;
 import dev.project.VinewoodStreet.repository.EmpresaRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class EmpresaService {
         this.empreDetalhesMapper = empreDetalhesMapper;
     }
 
+    @Cacheable("lista_empresas")
     public Page<EmpresasCardsDTO> listarEmpresas(Pageable paginacao) {
         Page<EmpresaModel> paginaDeEmpresas = empresaRepo.findAll(paginacao);
         return paginaDeEmpresas.map(emprCardMapper::toResponse);

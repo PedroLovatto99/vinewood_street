@@ -2,6 +2,7 @@ package dev.project.VinewoodStreet.dto.response;
 
 import dev.project.VinewoodStreet.enums.TipoImpacto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public record EventoNoticiaDTO(
@@ -11,5 +12,4 @@ public record EventoNoticiaDTO(
     String conteudo,
     TipoImpacto impacto,
     LocalDateTime dataPublicacao
-) {
-}
+) implements Serializable {}

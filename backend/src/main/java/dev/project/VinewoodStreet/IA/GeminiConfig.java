@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GeminiConfig {
 
-    @Value("${GEMINI_API_KEY}")
+    @Value("${api.gemini.key}")
     private String apiKey;
 
 

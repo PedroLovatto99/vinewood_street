@@ -1,5 +1,7 @@
 package dev.project.VinewoodStreet.dto.response;
 
+import java.io.Serializable;
+
 public record EmpresasCardsDTO(
     Long id,
     String sigla,
@@ -7,4 +9,4 @@ public record EmpresasCardsDTO(
     Double precoAtual,
     Double variacaoUltimas24h
 
-) { }
+) implements Serializable {}

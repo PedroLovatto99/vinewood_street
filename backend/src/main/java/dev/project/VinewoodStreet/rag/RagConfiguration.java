@@ -7,16 +7,21 @@ import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.chroma.ChromaEmbeddingStore;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RagConfiguration {
 
+    @Value("${CHROMA_URL:http://localhost:8000}")
+    private String chromaUrl;
+
+
     @Bean
     public EmbeddingStore<TextSegment> embeddingStore() {
         return ChromaEmbeddingStore.builder()
-                .baseUrl("http://localhost:8000")
+                .baseUrl(chromaUrl)
                 .collectionName("vinewood_lore")
                 .build();
     }

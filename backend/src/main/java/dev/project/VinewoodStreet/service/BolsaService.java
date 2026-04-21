@@ -7,6 +7,8 @@ import dev.project.VinewoodStreet.models.EventoNoticiaModel;
 import dev.project.VinewoodStreet.repository.EmpresaRepository;
 import dev.project.VinewoodStreet.repository.EventoNoticiaRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class BolsaService {
 
     @Transactional
     @Scheduled(fixedRate = 600000)
+    //@Scheduled(fixedRate = 15000)
+    @Caching(evict = {
+            @CacheEvict(value = "lista_empresas", allEntries = true),
+            @CacheEvict(value = "lista_noticias", allEntries = true)
+    })
     //@Scheduled(fixedRate = 10000)
     public void gerarEventoAleatorio() {
 

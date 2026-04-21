@@ -1,0 +1,21 @@
+# 1. Controle de Versão (GIGANTE e inútil no container)
+.git
+.gitignore
+
+# 2. Configurações da sua IDE (IntelliJ, VSCode, Eclipse)
+.idea/
+.vscode/
+*.iml
+*.project
+*.classpath
+.settings/
+
+# 3. Logs e Arquivos Temporários
+*.log
+logs/
+tmp/
+hs_err_pid*.log
+
+# 4. Arquivos do Sistema Operacional (Mac/Windows)
+.DS_Store
+Thumbs.db
